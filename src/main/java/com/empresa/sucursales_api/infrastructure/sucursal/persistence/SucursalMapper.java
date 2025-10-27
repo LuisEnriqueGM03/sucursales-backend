@@ -1,28 +1,20 @@
 package com.empresa.sucursales_api.infrastructure.sucursal.persistence;
-
 import com.empresa.sucursales_api.domain.sucursal.model.Sucursal;
 import com.empresa.sucursales_api.domain.sucursal.valueobject.Coordenadas;
 import com.empresa.sucursales_api.domain.sucursal.valueobject.SucursalId;
 import com.empresa.sucursales_api.domain.sucursal.valueobject.Direccion;
 import com.empresa.sucursales_api.domain.sucursal.valueobject.TelefonoPrincipal;
 import org.springframework.stereotype.Component;
-
-/**
- * Mapper para convertir entre SucursalEntity y Sucursal (domain model)
- */
 @Component
 public class SucursalMapper {
-    
     public Sucursal toDomain(SucursalEntity entity) {
         if (entity == null) {
             return null;
         }
-        
         Coordenadas coordenadas = null;
         if (entity.getLatitud() != null || entity.getLongitud() != null) {
             coordenadas = Coordenadas.of(entity.getLatitud(), entity.getLongitud());
         }
-        
     return Sucursal.builder()
         .id(entity.getId() != null ? SucursalId.of(entity.getId()) : null)
         .direccion(entity.getDireccion() != null ? Direccion.of(entity.getDireccion()) : null)
@@ -33,12 +25,10 @@ public class SucursalMapper {
         .updatedAt(entity.getUpdatedAt())
         .build();
     }
-    
     public SucursalEntity toEntity(Sucursal domain) {
         if (domain == null) {
             return null;
         }
-        
         return SucursalEntity.builder()
                 .id(domain.getId() != null ? domain.getId().getValue() : null)
         .direccion(domain.getDireccion() != null ? domain.getDireccion().getValue() : null)

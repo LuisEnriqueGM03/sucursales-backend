@@ -1,14 +1,8 @@
 package com.empresa.sucursales_api.domain.telefonopersonal.valueobject;
-
 import lombok.Value;
-
-/**
- * Value Object para el tipo de teléfono del personal
- */
 @Value
 public class TipoTelefono {
     String value;
-
     public static TipoTelefono of(String tipo) {
         if (tipo == null || tipo.trim().isEmpty()) {
             return new TipoTelefono("personal"); // Valor por defecto

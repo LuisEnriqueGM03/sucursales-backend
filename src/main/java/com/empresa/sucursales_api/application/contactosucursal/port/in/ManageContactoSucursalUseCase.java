@@ -1,14 +1,8 @@
 package com.empresa.sucursales_api.application.contactosucursal.port.in;
-
 import com.empresa.sucursales_api.application.contactosucursal.dto.ContactoSucursalRequest;
 import com.empresa.sucursales_api.application.contactosucursal.dto.ContactoSucursalResponse;
 import com.empresa.sucursales_api.application.contactosucursal.dto.ContactoSucursalUpdateRequest;
-
 import java.util.List;
-
-/**
- * Puerto de entrada para los casos de uso de ContactoSucursal
- */
 public interface ManageContactoSucursalUseCase {
     ContactoSucursalResponse createContacto(ContactoSucursalRequest request);
     ContactoSucursalResponse getContactoById(Long id);

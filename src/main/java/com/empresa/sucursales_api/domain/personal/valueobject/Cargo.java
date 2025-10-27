@@ -1,14 +1,8 @@
 package com.empresa.sucursales_api.domain.personal.valueobject;
-
 import lombok.Value;
-
-/**
- * Value Object para el cargo del personal
- */
 @Value
 public class Cargo {
     String value;
-
     public static Cargo of(String cargo) {
         if (cargo != null) {
             String trimmed = cargo.trim();

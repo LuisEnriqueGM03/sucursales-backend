@@ -1,12 +1,6 @@
 package com.empresa.sucursales_api.application.sucursal.port.in;
-
 import com.empresa.sucursales_api.application.sucursal.dto.SucursalResponse;
-
 import java.util.List;
-
-/**
- * Puerto de entrada para obtener sucursales
- */
 public interface GetSucursalUseCase {
     SucursalResponse getSucursalById(Long id);
     List<SucursalResponse> getAllSucursales();

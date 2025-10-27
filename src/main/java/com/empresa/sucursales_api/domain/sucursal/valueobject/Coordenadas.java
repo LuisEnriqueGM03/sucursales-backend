@@ -1,16 +1,10 @@
 package com.empresa.sucursales_api.domain.sucursal.valueobject;
-
 import lombok.Value;
 import java.math.BigDecimal;
-
-/**
- * Value Object que representa las coordenadas geográficas de una sucursal
- */
 @Value
 public class Coordenadas {
     BigDecimal latitud;
     BigDecimal longitud;
-    
     public static Coordenadas of(BigDecimal latitud, BigDecimal longitud) {
         if (latitud != null && (latitud.compareTo(BigDecimal.valueOf(-90)) < 0 || 
                                 latitud.compareTo(BigDecimal.valueOf(90)) > 0)) {

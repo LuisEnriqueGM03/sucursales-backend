@@ -1,14 +1,8 @@
 package com.empresa.sucursales_api.domain.personal.valueobject;
-
 import lombok.Value;
-
-/**
- * Value Object para el nombre completo del personal
- */
 @Value
 public class NombreCompleto {
     String value;
-
     public static NombreCompleto of(String nombre) {
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre completo es obligatorio");

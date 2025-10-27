@@ -1,14 +1,8 @@
 package com.empresa.sucursales_api.domain.imagensucursal.valueobject;
-
 import lombok.Value;
-
-/**
- * Value Object para el nombre del archivo de la imagen
- */
 @Value
 public class NombreArchivo {
     String value;
-
     public static NombreArchivo of(String nombreArchivo) {
         if (nombreArchivo == null || nombreArchivo.trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre del archivo es obligatorio");

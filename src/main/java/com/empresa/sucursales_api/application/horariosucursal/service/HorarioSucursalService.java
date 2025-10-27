@@ -1,5 +1,4 @@
 package com.empresa.sucursales_api.application.horariosucursal.service;
-
 import com.empresa.sucursales_api.application.horariosucursal.dto.HorarioSucursalRequest;
 import com.empresa.sucursales_api.application.horariosucursal.dto.HorarioSucursalResponse;
 import com.empresa.sucursales_api.application.horariosucursal.dto.HorarioSucursalUpdateRequest;
@@ -17,41 +16,29 @@ import com.empresa.sucursales_api.domain.sucursal.valueobject.SucursalId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
-/**
- * Implementación de los casos de uso de HorarioSucursal
- */
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class HorarioSucursalService implements CreateHorarioSucursalUseCase, GetHorarioSucursalUseCase,
                                                UpdateHorarioSucursalUseCase, DeleteHorarioSucursalUseCase {
-    
     private final HorarioSucursalRepositoryPort repositoryPort;
-    
     @Override
     public HorarioSucursalResponse createHorarioSucursal(HorarioSucursalRequest request) {
         DiaSemana diaSemana = DiaSemana.fromString(request.getDiaSemana());
         HoraApertura horaApertura = HoraApertura.of(request.getHoraApertura());
         HoraCierre horaCierre = HoraCierre.of(request.getHoraCierre());
-        
         HorarioSucursal horarioSucursal = HorarioSucursal.builder()
                 .sucursalId(SucursalId.of(request.getSucursalId()))
                 .diaSemana(diaSemana)
                 .horaApertura(horaApertura)
                 .horaCierre(horaCierre)
                 .build();
-        
-        // Validar que las horas sean coherentes
         horarioSucursal.validate();
-        
         HorarioSucursal savedHorario = repositoryPort.save(horarioSucursal);
         return mapToResponse(savedHorario);
     }
-    
     @Override
     @Transactional(readOnly = true)
     public HorarioSucursalResponse getHorarioSucursalById(Long id) {
@@ -60,7 +47,6 @@ public class HorarioSucursalService implements CreateHorarioSucursalUseCase, Get
                 .orElseThrow(() -> new RuntimeException("Horario no encontrado con id: " + id));
         return mapToResponse(horario);
     }
-    
     @Override
     @Transactional(readOnly = true)
     public List<HorarioSucursalResponse> getAllHorariosSucursales() {
@@ -68,7 +54,6 @@ public class HorarioSucursalService implements CreateHorarioSucursalUseCase, Get
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
-    
     @Override
     @Transactional(readOnly = true)
     public List<HorarioSucursalResponse> getHorariosBySucursalId(Long sucursalId) {
@@ -77,32 +62,25 @@ public class HorarioSucursalService implements CreateHorarioSucursalUseCase, Get
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
-    
     @Override
     public HorarioSucursalResponse updateHorarioSucursal(Long id, HorarioSucursalUpdateRequest request) {
         HorarioSucursalId horarioId = HorarioSucursalId.of(id);
         HorarioSucursal existingHorario = repositoryPort.findById(horarioId)
                 .orElseThrow(() -> new RuntimeException("Horario no encontrado con id: " + id));
-        
         DiaSemana diaSemana = request.getDiaSemana() != null ? 
                 DiaSemana.fromString(request.getDiaSemana()) : existingHorario.getDiaSemana();
         HoraApertura horaApertura = request.getHoraApertura() != null ? 
                 HoraApertura.of(request.getHoraApertura()) : existingHorario.getHoraApertura();
         HoraCierre horaCierre = request.getHoraCierre() != null ? 
                 HoraCierre.of(request.getHoraCierre()) : existingHorario.getHoraCierre();
-        
         HorarioSucursal updatedHorario = existingHorario
                 .withDiaSemana(diaSemana)
                 .withHoraApertura(horaApertura)
                 .withHoraCierre(horaCierre);
-        
-        // Validar que las horas sean coherentes
         updatedHorario.validate();
-        
         HorarioSucursal savedHorario = repositoryPort.save(updatedHorario);
         return mapToResponse(savedHorario);
     }
-    
     @Override
     public void deleteHorarioSucursal(Long id) {
         HorarioSucursalId horarioId = HorarioSucursalId.of(id);
@@ -111,7 +89,6 @@ public class HorarioSucursalService implements CreateHorarioSucursalUseCase, Get
         }
         repositoryPort.deleteById(horarioId);
     }
-    
     private HorarioSucursalResponse mapToResponse(HorarioSucursal horario) {
         return HorarioSucursalResponse.builder()
                 .id(horario.getId() != null ? horario.getId().getValue() : null)
