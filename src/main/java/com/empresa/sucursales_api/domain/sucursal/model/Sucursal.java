@@ -1,6 +1,7 @@
 package com.empresa.sucursales_api.domain.sucursal.model;
 import com.empresa.sucursales_api.domain.contactosucursal.model.ContactoSucursal;
 import com.empresa.sucursales_api.domain.horariosucursal.model.HorarioSucursal;
+import com.empresa.sucursales_api.domain.imagensucursal.model.ImagenSucursal;
 import com.empresa.sucursales_api.domain.sucursal.valueobject.Coordenadas;
 import com.empresa.sucursales_api.domain.sucursal.valueobject.SucursalId;
 import com.empresa.sucursales_api.domain.sucursal.valueobject.Direccion;
@@ -15,11 +16,13 @@ import java.util.List;
 @With
 public class Sucursal {
     SucursalId id;
+    String nombre;
     Direccion direccion;
     TelefonoPrincipal telefonoPrincipal;
     Coordenadas coordenadas;
     List<HorarioSucursal> horarios;
     List<ContactoSucursal> contactos;
+    List<ImagenSucursal> imagenes;
     boolean active;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;

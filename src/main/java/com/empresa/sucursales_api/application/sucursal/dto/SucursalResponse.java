@@ -1,6 +1,7 @@
 package com.empresa.sucursales_api.application.sucursal.dto;
 import com.empresa.sucursales_api.application.contactosucursal.dto.ContactoSucursalResponse;
 import com.empresa.sucursales_api.application.horariosucursal.dto.HorarioSucursalResponse;
+import com.empresa.sucursales_api.application.imagensucursal.dto.ImagenSucursalResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,12 +15,14 @@ import java.util.List;
 @AllArgsConstructor
 public class SucursalResponse {
     private Long id;
+    private String nombre;
     private String direccion;
     private String telefonoPrincipal;
     private BigDecimal latitud;
     private BigDecimal longitud;
     private List<HorarioSucursalResponse> horarios;
     private List<ContactoSucursalResponse> contactos;
+    private List<ImagenSucursalResponse> imagenes;
     private boolean active;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -17,6 +17,7 @@ public class SucursalMapper {
         }
     return Sucursal.builder()
         .id(entity.getId() != null ? SucursalId.of(entity.getId()) : null)
+        .nombre(entity.getNombre())
         .direccion(entity.getDireccion() != null ? Direccion.of(entity.getDireccion()) : null)
         .telefonoPrincipal(entity.getTelefonoPrincipal() != null ? TelefonoPrincipal.of(entity.getTelefonoPrincipal()) : null)
         .coordenadas(coordenadas)
@@ -31,6 +32,7 @@ public class SucursalMapper {
         }
         return SucursalEntity.builder()
                 .id(domain.getId() != null ? domain.getId().getValue() : null)
+                .nombre(domain.getNombre())
         .direccion(domain.getDireccion() != null ? domain.getDireccion().getValue() : null)
         .telefonoPrincipal(domain.getTelefonoPrincipal() != null ? domain.getTelefonoPrincipal().getValue() : null)
                 .latitud(domain.getCoordenadas() != null ? domain.getCoordenadas().getLatitud() : null)

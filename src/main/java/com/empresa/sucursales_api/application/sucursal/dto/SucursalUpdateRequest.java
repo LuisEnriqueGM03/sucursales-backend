@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SucursalUpdateRequest {
+    private String nombre;
     private String direccion;
     private String telefonoPrincipal;
     private BigDecimal latitud;

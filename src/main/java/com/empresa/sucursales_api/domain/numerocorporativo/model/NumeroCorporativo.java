@@ -13,5 +13,5 @@ public class NumeroCorporativo {
     NumeroCorporativoId id;
     Numero numero;
     SucursalId sucursalId;
-    PersonalId personalId; // Opcional - puede ser null si no estÃ¡ asignado
+    PersonalId personalId;
 }

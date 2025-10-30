@@ -16,6 +16,10 @@ public class SucursalEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name = "nombre", nullable = false, length = 150)
+    private String nombre;
+    
     @Column(name = "direccion", nullable = false, columnDefinition = "TEXT")
     private String direccion;
     @Column(name = "telefono_principal", length = 20)
